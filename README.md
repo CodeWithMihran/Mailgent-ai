@@ -29,13 +29,16 @@ For college students and graduates applying for jobs, their email inbox is the s
 ---
 
 ## 💡 The Solution: Mailgent (From Intent to Action)
-Mailgent turns a simple natural language prompt in **ASI:One chat** into real-world autonomous actions inside Gmail:
+Mailgent turns simple natural language prompts in **ASI:One chat** into real-world autonomous actions inside Gmail:
 
-1. **Autonomous Audit & Classification:** Scans recent emails and groups them into `Job/Internship`, `Academic`, `Finance`, and `Promotions`.
-2. **48-Hour Deadline Radar:** Analyzes email bodies for urgent action items (e.g. *"Complete assessment within 48 hours"*, *"Select interview slot by Friday 5 PM"*).
+1. **Autonomous Audit & Classification (`Audit`):** Scans recent emails and groups them into `Job/Internship`, `Academic`, `Finance`, and `Promotions`.
+2. **48-Hour Deadline Radar:** Analyzes email bodies for urgent action items (e.g. *"Complete assessment within 48 hours"*, *"Interview invite: reply by Friday 5 PM"*).
 3. **👻 Ghosting Radar (Creative Innovation):** Detects stalled job applications (> 5 days without response) and automatically prepares context-aware follow-up emails in your **Gmail Drafts folder**.
-4. **Human-in-the-Loop (HITL) Safety:** Delivers an interactive Approval Card in ASI:One chat summarizing proposed actions before modifying your inbox.
+4. **Human-in-the-Loop (HITL) Safety (`Approve` / `Cancel`):** Delivers an interactive Approval Card in ASI:One chat summarizing proposed actions before modifying your inbox.
 5. **Real-World Inbox Execution:** Upon typing `Approve`, Mailgent creates and applies `[Agent] Job` and `[Agent] Urgent` labels, saves follow-up drafts, and archives promotional clutter.
+6. **Student Career Radar (`Pipeline`):** Aggregates all recruitment communications into an active board of interview loops, coding challenges, and status reviews.
+7. **Instant Gmail Search (`Search <term>`):** Live keyword search across your inbox (e.g. `Search interview`, `Search stipend`).
+8. **Live Account Profile (`Profile`):** Displays real-time Gmail connection stats, message counts, and threads.
 
 ---
 
@@ -76,7 +79,7 @@ Mailgent turns a simple natural language prompt in **ASI:One chat** into real-wo
 
 ### 2. Installation
 ```bash
-git clone https://github.com/<your-username>/Mailgent-ai.git
+git clone https://github.com/CodeWithMihran/Mailgent-ai.git
 cd Mailgent-ai
 
 python -m venv venv
