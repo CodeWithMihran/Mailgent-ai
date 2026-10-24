@@ -40,7 +40,8 @@ JOB_PATTERNS = [
     r"interview", r"coding challenge", r"online assessment", r"hackerrank",
     r"technical assessment", r"offer letter", r"internship", r"job application",
     r"talent acquisition", r"recruiting", r"greenhouse\.io", r"lever\.co",
-    r"workday", r"phone screen", r"hiring manager", r"sde intern"
+    r"workday", r"phone screen", r"hiring manager", r"sde intern",
+    r"interview invite", r"internshala", r"assessment is pending"
 ]
 
 ACADEMIC_PATTERNS = [
@@ -58,15 +59,18 @@ FINANCE_PATTERNS = [
 PROMO_PATTERNS = [
     r"unsubscribe", r"flash sale", r"50% off", r"discount", r"newsletter",
     r"special offer", r"weekly digest", r"trending on", r"streak", r"meetups near you",
-    r"doorbuster", r"double star", r"upgrade to premium", r"deals"
+    r"doorbuster", r"double star", r"upgrade to premium", r"deals",
+    r"quiz\b", r"bite-size", r"win big", r"win ₹", r"win rs", r"grab ₹"
 ]
 
 DEADLINE_PATTERNS = [
-    (r"(?:within|in)\s+(24|48)\s*hours?", "Within 24-48 Hours"),
+    (r"(?:within|in)\s+(?:the\s+next\s+)?(12|24|48|72)\s*hours?", "Within 12-48 Hours"),
     (r"expires\s+in\s+(\d+\s*hours?)", r"Expires in \1"),
     (r"by\s+(tomorrow|tonight|friday|monday|sunday|today)\b(?:\s+at\s+[\d:]+\s*(?:am|pm)?)?", r"By \1"),
     (r"due\s+date\s*(?:is|:)?\s*([a-zA-Z]+\s+\d{1,2}(?:,\s*\d{4})?)", r"Due: \1"),
     (r"closes\s+in\s+(\d+\s*hours?)", r"Closes in \1"),
+    (r"deadline\s+approaching", "Deadline Approaching (< 24h)"),
+    (r"assessment\s+is\s+pending", "Assessment Pending (< 24h)"),
     (r"action\s+required", "Immediate Action Required"),
     (r"urgent\b", "Urgent Attention Needed")
 ]
@@ -116,20 +120,31 @@ class EmailClassifier:
         reason = "Standard inbox message."
         recommended_actions = []
 
-        if any(re.search(p, text) for p in JOB_PATTERNS):
+        is_promo = any(re.search(p, text) for p in PROMO_PATTERNS)
+        is_job = any(re.search(p, text) for p in JOB_PATTERNS)
+        is_academic = any(re.search(p, text) for p in ACADEMIC_PATTERNS)
+        is_finance = any(re.search(p, text) for p in FINANCE_PATTERNS)
+
+        # If it's a promotional quiz / marketing blast without direct interview invite
+        if is_promo and not any(k in text for k in ["interview invite", "assessment is pending", "offer letter"]):
+            category = "Promotions"
+            score = 1
+            reason = "Promotional offer, marketing newsletter, or sales digest."
+            recommended_actions.append("archive")
+        elif is_job:
             category = "Job/Internship"
             score = 7
             reason = "Job or internship recruitment communication."
             recommended_actions.append("label_job")
-        elif any(re.search(p, text) for p in ACADEMIC_PATTERNS):
+        elif is_academic:
             category = "Academic"
             score = 5
             reason = "University or coursework notification."
-        elif any(re.search(p, text) for p in FINANCE_PATTERNS):
+        elif is_finance:
             category = "Finance"
             score = 4
             reason = "Billing receipt or financial transaction."
-        elif any(re.search(p, text) for p in PROMO_PATTERNS):
+        elif is_promo:
             category = "Promotions"
             score = 1
             reason = "Promotional offer, marketing newsletter, or sales digest."
@@ -143,19 +158,22 @@ class EmailClassifier:
                 deadline_found = match.expand(label) if "\\" in label else label
                 break
 
+        # Mentor's Guard: only trust deadline detection for categories that matter
         is_urgent = False
-        if deadline_found:
-            is_urgent = True
-            score = max(score, 9)
-            reason += f" Action deadline detected: {deadline_found}."
-            if "label_urgent" not in recommended_actions:
-                recommended_actions.append("label_urgent")
+        if deadline_found and category in ("Job/Internship", "Academic", "Finance"):
+            # Ensure marketing FOMO cannot trigger urgency
+            if not any(re.search(p, text) for p in [r"quiz\b", r"flash sale", r"50% off", r"bite-size", r"win big", r"win ₹"]):
+                is_urgent = True
+                score = max(score, 9)
+                reason += f" Action deadline detected: {deadline_found}."
+                if "label_urgent" not in recommended_actions:
+                    recommended_actions.append("label_urgent")
 
         return {
             "category": category,
             "urgency_score": score,
             "is_urgent": is_urgent,
-            "deadline": deadline_found,
+            "deadline": deadline_found if is_urgent else None,
             "reason": reason.strip(),
             "recommended_actions": recommended_actions
         }
