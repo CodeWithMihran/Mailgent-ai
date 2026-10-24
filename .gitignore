@@ -27,3 +27,5 @@ Thumbs.db
 *.log
 .agent/
 agent_data/
+codedump.txt
+dump_code.py

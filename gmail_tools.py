@@ -13,6 +13,7 @@ import os
 import sys
 import json
 import base64
+from email.message import EmailMessage
 from typing import List, Dict, Any, Optional
 
 # Ensure UTF-8 output on Windows consoles
@@ -25,6 +26,17 @@ if sys.platform == "win32":
 
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+
+
+def create_raw_email(sender: str, subject: str, body: str, date_str: Optional[str] = None) -> str:
+    msg = EmailMessage()
+    msg["To"] = sender
+    msg["From"] = "me"
+    msg["Subject"] = subject
+    if date_str:
+        msg["Date"] = date_str
+    msg.set_content(body)
+    return base64.urlsafe_b64encode(msg.as_bytes()).decode("utf-8")
 
 TOKEN_FILE = os.getenv("GMAIL_TOKEN_PATH", "token.json")
 SAMPLE_EMAILS_FILE = os.getenv("SAMPLE_EMAILS_PATH", "sample_emails.json")
@@ -271,17 +283,61 @@ class GmailClient:
         """Archives emails by removing the 'INBOX' label."""
         return self.apply_labels(message_ids=message_ids, remove_label_names=["INBOX"])
 
+    # -------------------------------------------------------------------------
+    # Creative Innovation: Ghosting Radar & Smart Follow-Up Drafter
+    # -------------------------------------------------------------------------
+    def create_followup_draft(self, to_email: str, subject: str, body: str, thread_id: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Creates a professional follow-up email in the user's Gmail Drafts folder.
+        The user can review and click 'Send' whenever ready.
+        """
+        if not subject.lower().startswith("re:"):
+            subject = f"Re: {subject}"
+
+        if self.is_offline:
+            print(f"[+] GmailClient (Offline): Created Gmail Draft to <{to_email}>: '{subject}'")
+            return {
+                "id": f"draft_{len(_mock_inbox_state) + 1:03d}",
+                "to": to_email,
+                "subject": subject,
+                "status": "created_offline"
+            }
+
+        try:
+            raw_msg = create_raw_email(sender=to_email, subject=subject, body=body)
+            draft_body = {
+                "message": {
+                    "raw": raw_msg
+                }
+            }
+            if thread_id:
+                draft_body["message"]["threadId"] = thread_id
+
+            draft = self.service.users().drafts().create(userId="me", body=draft_body).execute()
+            print(f"[+] GmailClient: Created live Gmail Draft (ID: {draft.get('id')}) to {to_email}")
+            return {
+                "id": draft.get("id"),
+                "to": to_email,
+                "subject": subject,
+                "status": "created_live"
+            }
+        except Exception as e:
+            print(f"[!] GmailClient: Failed to create draft: {e}")
+            return {"error": str(e)}
+
     def execute_audit_actions(
         self,
         job_message_ids: List[str],
         urgent_message_ids: List[str],
-        archive_message_ids: List[str]
+        archive_message_ids: List[str],
+        draft_followups: Optional[List[Dict[str, Any]]] = None
     ) -> Dict[str, Any]:
         """
         Executes the full Human-in-the-Loop action package:
         1. Tags job/internship messages with '[Agent] Job'
         2. Tags urgent messages with '[Agent] Urgent'
         3. Archives clutter/promotions by removing 'INBOX'
+        4. Auto-creates professional follow-up drafts for stalled/ghosted applications
         """
         print("=" * 60)
         print("[*] GmailClient: Executing approved inbox actions...")
@@ -290,6 +346,7 @@ class GmailClient:
         job_count = 0
         urgent_count = 0
         archive_count = 0
+        drafts_count = 0
 
         if job_message_ids:
             job_count = self.apply_labels(
@@ -306,11 +363,23 @@ class GmailClient:
         if archive_message_ids:
             archive_count = self.archive_emails(message_ids=archive_message_ids)
 
+        if draft_followups:
+            for d in draft_followups:
+                res = self.create_followup_draft(
+                    to_email=d.get("to", ""),
+                    subject=d.get("subject", ""),
+                    body=d.get("body", ""),
+                    thread_id=d.get("threadId")
+                )
+                if "error" not in res:
+                    drafts_count += 1
+
         summary = {
             "job_labeled": job_count,
             "urgent_labeled": urgent_count,
             "archived_promotions": archive_count,
-            "total_actions": job_count + urgent_count + archive_count,
+            "drafts_created": drafts_count,
+            "total_actions": job_count + urgent_count + archive_count + drafts_count,
             "mode": "offline" if self.is_offline else "live"
         }
 
@@ -318,6 +387,7 @@ class GmailClient:
         print(f"  - Job emails labeled: {summary['job_labeled']}")
         print(f"  - Urgent emails labeled: {summary['urgent_labeled']}")
         print(f"  - Clutter archived: {summary['archived_promotions']}")
+        print(f"  - Follow-up drafts prepared: {summary['drafts_created']}")
         print("=" * 60)
         return summary
 

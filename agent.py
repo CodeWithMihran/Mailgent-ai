@@ -41,6 +41,9 @@ from uagents import Agent, Context, Protocol
 from uagents_core.contrib.protocols.chat import (
     chat_protocol_spec,
     ChatMessage,
+    ChatAcknowledgement,
+    StartSessionContent,
+    EndSessionContent,
     TextContent
 )
 
@@ -57,6 +60,7 @@ AGENT_NAME = os.getenv("AGENT_NAME", "mailgent")
 AGENT_SEED = os.getenv("AGENT_SEED", "mailgent-student-inbox-assistant-v1")
 AGENT_PORT = int(os.getenv("AGENT_PORT", "8000"))
 MAILBOX_KEY = os.getenv("AGENT_MAILBOX_KEY") or os.getenv("AGENTVERSE_API_KEY")
+OWNER_ADDRESS = os.getenv("OWNER_ADDRESS")
 
 # In-memory storage for pending Human-in-the-Loop audit proposals per user
 # Key: user_address/sender, Value: pending_plan dict
@@ -75,8 +79,12 @@ agent_kwargs = {
 }
 
 if MAILBOX_KEY and MAILBOX_KEY != "your_agentverse_mailbox_key_here" and MAILBOX_KEY != "your_agentverse_api_key_here":
-    print(f"[+] Mailgent: Connecting with Agentverse Mailbox key...")
-    agent_kwargs["mailbox"] = f"{MAILBOX_KEY}@https://agentverse.ai"
+    print(f"[+] Mailgent: Connecting with Agentverse Mailbox...")
+    agent_kwargs["mailbox"] = True
+    agent_kwargs["agentverse"] = {"api_key": MAILBOX_KEY}
+    # When mailbox is True, agentverse routes messages through the mailbox endpoint
+    if "endpoint" in agent_kwargs:
+        del agent_kwargs["endpoint"]
 else:
     print("[*] Mailgent: Running locally (Set AGENT_MAILBOX_KEY in .env to link to Agentverse / ASI:One)")
 
@@ -120,7 +128,8 @@ def process_user_intent(sender: str, text: str) -> str:
         result = gmail_client.execute_audit_actions(
             job_message_ids=plan.get("job_ids", []),
             urgent_message_ids=plan.get("urgent_ids", []),
-            archive_message_ids=plan.get("archive_ids", [])
+            archive_message_ids=plan.get("archive_ids", []),
+            draft_followups=plan.get("draft_followups", [])
         )
 
         # Clear pending plan
@@ -152,17 +161,56 @@ def process_user_intent(sender: str, text: str) -> str:
 async def handle_chat_message(ctx: Context, sender: str, msg: ChatMessage):
     """
     Handles incoming Agent Chat Protocol messages from ASI:One.
+    Follows Fetch.ai ACP quickstart specifications:
+    - Sends immediate ChatAcknowledgement
+    - Parses StartSession, EndSession, and TextContent
+    - Responds with Markdown cards
     """
+    ctx.logger.info(f"Received ACP message from {sender} (ID: {msg.msg_id})")
+
+    # Send ChatAcknowledgement back immediately
+    try:
+        ack = ChatAcknowledgement(
+            timestamp=datetime.now(timezone.utc),
+            acknowledged_msg_id=msg.msg_id
+        )
+        await ctx.send(sender, ack)
+        ctx.logger.info(f"Acknowledged message {msg.msg_id} to {sender}")
+    except Exception as e:
+        ctx.logger.warning(f"Could not send acknowledgement: {e}")
+
     incoming_text = ""
     for item in msg.content:
-        if isinstance(item, TextContent):
+        if isinstance(item, StartSessionContent):
+            ctx.logger.info(f"Chat session started with {sender}")
+        elif isinstance(item, EndSessionContent):
+            ctx.logger.info(f"Chat session ended with {sender}")
+            if sender in pending_audits:
+                del pending_audits[sender]
+            return
+        elif isinstance(item, TextContent):
             incoming_text += item.text + " "
 
     incoming_text = incoming_text.strip()
-    ctx.logger.info(f"Received message from {sender}: '{incoming_text}'")
+    if not incoming_text:
+        return
 
-    # Generate response
-    reply_text = process_user_intent(sender=sender, text=incoming_text)
+    # Security: Optional Owner Allowlist
+    if OWNER_ADDRESS and OWNER_ADDRESS.strip() and OWNER_ADDRESS != "your_asi1_user_address_here":
+        if sender != OWNER_ADDRESS:
+            ctx.logger.warning(f"Unauthorized message from {sender} (Expected owner: {OWNER_ADDRESS})")
+            unauth_msg = ChatMessage(
+                timestamp=datetime.now(timezone.utc),
+                msg_id=uuid.uuid4(),
+                content=[TextContent(type="text", text="🔒 **Access Restricted:** This Mailgent instance is locked to its owner's inbox.")]
+            )
+            await ctx.send(sender, unauth_msg)
+            return
+
+    ctx.logger.info(f"Processing command from {sender}: '{incoming_text}'")
+
+    # Unblock event loop: Execute Gmail API & classification in a separate worker thread
+    reply_text = await asyncio.to_thread(process_user_intent, sender, incoming_text)
 
     # Send response back via Chat Protocol
     response_msg = ChatMessage(
@@ -174,7 +222,13 @@ async def handle_chat_message(ctx: Context, sender: str, msg: ChatMessage):
     ctx.logger.info(f"Sent reply to {sender}")
 
 
-agent.include(chat_proto)
+@chat_proto.on_message(model=ChatAcknowledgement)
+async def handle_acknowledgement(ctx: Context, sender: str, msg: ChatAcknowledgement):
+    """Handles delivery acknowledgements for outgoing messages."""
+    ctx.logger.info(f"Delivery confirmed from {sender} for message {msg.acknowledged_msg_id}")
+
+
+agent.include(chat_proto, publish_manifest=True)
 
 
 # -------------------------------------------------------------------------
