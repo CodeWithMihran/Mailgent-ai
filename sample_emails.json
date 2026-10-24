@@ -1,0 +1,622 @@
+[
+  {
+    "id": "msg_001",
+    "threadId": "thread_001",
+    "sender": "recruiting@stripe.com",
+    "subject": "Interview Invitation: Software Engineering Intern - Action Required",
+    "date": "2026-10-23 20:27:29",
+    "snippet": "Congratulations! We would like to invite you to the technical interview. Please confirm your slot within 48 hours.",
+    "body": "Hi candidate,\n\nWe were impressed by your profile and would love to move you to the round 2 technical interview. Please select an interview slot using our scheduling portal by tomorrow 5:00 PM EST.\n\nBest regards,\nStripe University Talent",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_002",
+    "threadId": "thread_002",
+    "sender": "talent@amazon.com",
+    "subject": "Online Assessment: SDE Intern 2027 (Expires in 48 hours)",
+    "date": "2026-10-23 18:27:29",
+    "snippet": "Your Hackerrank coding challenge link is now active. Please complete it within 48 hours of receiving this email.",
+    "body": "Dear applicant,\n\nYou have been invited to take the Amazon SDE Online Assessment. The assessment link expires in 48 hours on Oct 25, 2026 at 11:59 PM. Click here to begin.\n\nAmazon Student Programs",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_003",
+    "threadId": "thread_003",
+    "sender": "careers@google.com",
+    "subject": "Update on your Google Summer 2027 Internship Application",
+    "date": "2026-10-23 16:27:29",
+    "snippet": "Thank you for your interest in Google. We would like to schedule a phone screening next week.",
+    "body": "Hello,\n\nWe have reviewed your application and would like to arrange an introductory phone screen. Please submit your availability by Friday.\n\nGoogle Talent Acquisition",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_004",
+    "threadId": "thread_004",
+    "sender": "no-reply@greenhouse.io",
+    "subject": "Your application to Datadog - Software Engineer Intern",
+    "date": "2026-10-23 14:27:29",
+    "snippet": "We received your application for the Software Engineer Intern role at Datadog.",
+    "body": "Thank you for applying to Datadog. Our recruitment team is currently reviewing your resume and will reach out with next steps soon.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_005",
+    "threadId": "thread_005",
+    "sender": "recruiter@microsoft.com",
+    "subject": "Microsoft Final Round Interview Confirmation & Preparation Guide",
+    "date": "2026-10-23 12:27:29",
+    "snippet": "Your final round interview is confirmed for Tuesday. Please submit your photo ID verification before Monday 12 PM.",
+    "body": "Hello,\n\nThis email confirms your upcoming final round loop. Action required: Please upload your photo identification document at least 24 hours prior to the call.\n\nMicrosoft University Recruiting",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_006",
+    "threadId": "thread_006",
+    "sender": "jobs@palantir.com",
+    "subject": "Palantir Technologies - Application Status Update",
+    "date": "2026-10-23 10:27:29",
+    "snippet": "Thank you for taking the time to speak with our team. Unfortunately, we will not be moving forward at this time.",
+    "body": "Dear applicant,\n\nThank you for interviewing with Palantir. At this time, we have decided not to advance your application. We wish you the best in your search.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_007",
+    "threadId": "thread_007",
+    "sender": "invitations@lever.co",
+    "subject": "Take-Home Design Challenge: Figma Product Design Internship",
+    "date": "2026-10-23 08:27:29",
+    "snippet": "Here is your Figma design prompt. The deadline to submit your portfolio deck is 48 hours from today.",
+    "body": "Welcome to the next phase of the Figma design internship! Please complete the enclosed design exercise. Due date is Oct 25, 2026.\n\nFigma Design Team",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_008",
+    "threadId": "thread_008",
+    "sender": "earlytalent@uber.com",
+    "subject": "Uber Star Intern Program - Phone Screen Scheduled",
+    "date": "2026-10-23 06:27:29",
+    "snippet": "Your 30-minute phone chat with our engineering manager has been confirmed.",
+    "body": "Hi there,\n\nYour interview is scheduled for Oct 27, 2026 at 2:00 PM. Here is your Google Meet link.\n\nUber Early Talent",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_009",
+    "threadId": "thread_009",
+    "sender": "hr@nvidia.com",
+    "subject": "Action Required: Sign NVIDIA Internship Offer Letter",
+    "date": "2026-10-23 04:27:29",
+    "snippet": "Please review and countersign your offer letter on Workday by end of day Friday.",
+    "body": "Congratulations! We are thrilled to offer you the AI Engineering Intern position at NVIDIA. Please sign the attached document by Friday 5 PM.\n\nNVIDIA HR",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_010",
+    "threadId": "thread_010",
+    "sender": "campus@bloomberg.com",
+    "subject": "Bloomberg Coding Test: Quant Research Internship",
+    "date": "2026-10-23 02:27:29",
+    "snippet": "You have 72 hours to complete the Bloomberg technical test on HackerRank.",
+    "body": "Hi applicant,\n\nPlease find your personalized link for the Bloomberg quantitative challenge. Complete within 3 days.\n\nBloomberg Campus Team",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_011",
+    "threadId": "thread_011",
+    "sender": "registrar@university.edu",
+    "subject": "URGENT: Fall Semester Course Registration Closes in 24 Hours",
+    "date": "2026-10-22 18:57:29",
+    "snippet": "All add/drop registration requests must be finalized by 5:00 PM tomorrow. Late fee will apply.",
+    "body": "All add/drop registration requests must be finalized by 5:00 PM tomorrow. Late fee will apply.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_012",
+    "threadId": "thread_012",
+    "sender": "prof.adams@cs.university.edu",
+    "subject": "CS 480 Final Project Guidelines and Milestone 2 Due Date",
+    "date": "2026-10-22 16:27:29",
+    "snippet": "Milestone 2 submission is open on Canvas. Submit your github repos by Sunday midnight.",
+    "body": "Milestone 2 submission is open on Canvas. Submit your github repos by Sunday midnight.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_013",
+    "threadId": "thread_013",
+    "sender": "financialaid@university.edu",
+    "subject": "Notice: Spring Tuition Grant Disbursement Verification",
+    "date": "2026-10-22 13:57:29",
+    "snippet": "Please verify your direct deposit banking information in the student portal.",
+    "body": "Please verify your direct deposit banking information in the student portal.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_014",
+    "threadId": "thread_014",
+    "sender": "library@university.edu",
+    "subject": "Overdue Book Notice: Advanced Compiler Design",
+    "date": "2026-10-22 11:27:29",
+    "snippet": "Your borrowed book is past due. Please return or renew online to avoid penalties.",
+    "body": "Your borrowed book is past due. Please return or renew online to avoid penalties.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_015",
+    "threadId": "thread_015",
+    "sender": "deanofstudents@university.edu",
+    "subject": "Campus Advisory: Career Fair Logistics & Room Assignments",
+    "date": "2026-10-22 08:57:29",
+    "snippet": "The Engineering & Tech Career Fair will take place this Thursday at the Student Center.",
+    "body": "The Engineering & Tech Career Fair will take place this Thursday at the Student Center.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_016",
+    "threadId": "thread_016",
+    "sender": "canvas-notifications@instructure.com",
+    "subject": "Grade Posted: Midterm Exam - CS 401 Distributed Systems",
+    "date": "2026-10-22 06:27:29",
+    "snippet": "Your score has been updated. Mean: 82%, Median: 84%. View comments on Canvas.",
+    "body": "Your score has been updated. Mean: 82%, Median: 84%. View comments on Canvas.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_017",
+    "threadId": "thread_017",
+    "sender": "dept-head@ee.university.edu",
+    "subject": "Call for Undergraduate Teaching Assistants (TAs) for Spring",
+    "date": "2026-10-22 03:57:29",
+    "snippet": "Applications for CS/EE TAs are open until Nov 1st. Stipend details enclosed.",
+    "body": "Applications for CS/EE TAs are open until Nov 1st. Stipend details enclosed.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_018",
+    "threadId": "thread_018",
+    "sender": "advising@university.edu",
+    "subject": "Degree Audit Check: Requirements for Spring Graduation",
+    "date": "2026-10-22 01:27:29",
+    "snippet": "Please schedule your mandatory 15-minute graduation check with your faculty advisor.",
+    "body": "Please schedule your mandatory 15-minute graduation check with your faculty advisor.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_019",
+    "threadId": "thread_019",
+    "sender": "research-lab@university.edu",
+    "subject": "Weekly AI Lab Seminar: Agentic Systems & Multi-Agent Swarms",
+    "date": "2026-10-21 22:57:29",
+    "snippet": "Join us this Friday at 3:00 PM in Hall B for our reading group discussion.",
+    "body": "Join us this Friday at 3:00 PM in Hall B for our reading group discussion.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_020",
+    "threadId": "thread_020",
+    "sender": "healthcenter@university.edu",
+    "subject": "Annual Student Health & Immunization Verification Notice",
+    "date": "2026-10-21 20:27:29",
+    "snippet": "Please verify your records before the registration freeze date.",
+    "body": "Please verify your records before the registration freeze date.\n\nPlease visit the university portal for complete documentation.",
+    "labels": [
+      "INBOX",
+      "UNREAD"
+    ]
+  },
+  {
+    "id": "msg_021",
+    "threadId": "thread_021",
+    "sender": "billing@github.com",
+    "subject": "GitHub Copilot Monthly Subscription Receipt - .00",
+    "date": "2026-10-21 07:27:29",
+    "snippet": "Thank you for your payment. Invoice #GH-83921 has been processed successfully.",
+    "body": "Thank you for your payment. Invoice #GH-83921 has been processed successfully.\n\nAccount statement ref: 150822. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_022",
+    "threadId": "thread_022",
+    "sender": "no-reply@uber.com",
+    "subject": "Your Ride with Uber on Thursday Morning",
+    "date": "2026-10-21 04:27:29",
+    "snippet": "Total: .42. Thanks for riding with Uber. View full trip receipt.",
+    "body": "Total: .42. Thanks for riding with Uber. View full trip receipt.\n\nAccount statement ref: 158004. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_023",
+    "threadId": "thread_023",
+    "sender": "payments@aws.amazon.com",
+    "subject": "AWS Billing Notification: Statement for October 2026",
+    "date": "2026-10-21 01:27:29",
+    "snippet": "Your monthly statement is ready for review. Current balance: .35.",
+    "body": "Your monthly statement is ready for review. Current balance: .35.\n\nAccount statement ref: 165186. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_024",
+    "threadId": "thread_024",
+    "sender": "support@spotify.com",
+    "subject": "Your Spotify Premium Student Receipt",
+    "date": "2026-10-20 22:27:29",
+    "snippet": "Receipt for your recurring monthly subscription of .99.",
+    "body": "Receipt for your recurring monthly subscription of .99.\n\nAccount statement ref: 172368. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_025",
+    "threadId": "thread_025",
+    "sender": "orders@doordash.com",
+    "subject": "DoorDash Order Delivered: Chipotle Mexican Grill",
+    "date": "2026-10-20 19:27:29",
+    "snippet": "Your driver delivered your order. Total paid: .15.",
+    "body": "Your driver delivered your order. Total paid: .15.\n\nAccount statement ref: 179550. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_026",
+    "threadId": "thread_026",
+    "sender": "billing@digitalocean.com",
+    "subject": "DigitalOcean Invoice: Droplet Hosting #DO-99214",
+    "date": "2026-10-20 16:27:29",
+    "snippet": "Your account has been billed .00 for active cloud droplets.",
+    "body": "Your account has been billed .00 for active cloud droplets.\n\nAccount statement ref: 186732. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_027",
+    "threadId": "thread_027",
+    "sender": "transfer@venmo.com",
+    "subject": "Payment Sent: Roommate Split for Utilities",
+    "date": "2026-10-20 13:27:29",
+    "snippet": "You sent .00 to Alex for Electric & Wi-Fi.",
+    "body": "You sent .00 to Alex for Electric & Wi-Fi.\n\nAccount statement ref: 193914. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_028",
+    "threadId": "thread_028",
+    "sender": "service@paypal.com",
+    "subject": "You sent a payment to JetBrains Store",
+    "date": "2026-10-20 10:27:29",
+    "snippet": "Payment of .00 completed for CLion student pack.",
+    "body": "Payment of .00 completed for CLion student pack.\n\nAccount statement ref: 201096. Retain this receipt for your records.",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_029",
+    "threadId": "thread_029",
+    "sender": "deals@amazon.com",
+    "subject": "Flash Sale: 50% Off Mechanical Keyboards and Tech Accessories!",
+    "date": "2026-10-21 12:27:29",
+    "snippet": "Shop our 24-hour deals on gaming mice, monitors, and ergonomic desks.",
+    "body": "Shop our 24-hour deals on gaming mice, monitors, and ergonomic desks.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_030",
+    "threadId": "thread_030",
+    "sender": "news@substack.com",
+    "subject": "The Pragmatic Engineer: Issue #142 - Surviving the Tech Downturn",
+    "date": "2026-10-21 10:27:29",
+    "snippet": "Read the latest deep dive on hiring benchmarks, salary trends, and promotion packets.",
+    "body": "Read the latest deep dive on hiring benchmarks, salary trends, and promotion packets.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_031",
+    "threadId": "thread_031",
+    "sender": "marketing@udemy.com",
+    "subject": "Courses starting at .99: Master Rust, Docker & Kubernetes today",
+    "date": "2026-10-21 08:27:29",
+    "snippet": "Special seasonal discount available for 48 hours only. Level up your engineering skills.",
+    "body": "Special seasonal discount available for 48 hours only. Level up your engineering skills.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_032",
+    "threadId": "thread_032",
+    "sender": "info@meetup.com",
+    "subject": "3 New Tech Meetups near you: Python Developers & Generative AI",
+    "date": "2026-10-21 06:27:29",
+    "snippet": "Check out upcoming developer gatherings happening in your neighborhood this weekend.",
+    "body": "Check out upcoming developer gatherings happening in your neighborhood this weekend.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_033",
+    "threadId": "thread_033",
+    "sender": "newsletter@hackernewsletter.com",
+    "subject": "Hacker Newsletter #680: Top stories from Hacker News this week",
+    "date": "2026-10-21 04:27:29",
+    "snippet": "Curated links, startup launches, and engineering postmortems.",
+    "body": "Curated links, startup launches, and engineering postmortems.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_034",
+    "threadId": "thread_034",
+    "sender": "promo@coursera.org",
+    "subject": "Advance your career: Earn an accredited Deep Learning Certificate",
+    "date": "2026-10-21 02:27:29",
+    "snippet": "Enroll today with student financial aid options.",
+    "body": "Enroll today with student financial aid options.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_035",
+    "threadId": "thread_035",
+    "sender": "support@linkedin.com",
+    "subject": "You appeared in 14 searches this week on LinkedIn",
+    "date": "2026-10-21 00:27:29",
+    "snippet": "See who is looking at your profile with 1 month free Premium trial.",
+    "body": "See who is looking at your profile with 1 month free Premium trial.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_036",
+    "threadId": "thread_036",
+    "sender": "updates@medium.com",
+    "subject": "Staff Picks: Why Modern Agents are Replacing Microservices",
+    "date": "2026-10-20 22:27:29",
+    "snippet": "Recommended articles tailored to your reading history on Medium.",
+    "body": "Recommended articles tailored to your reading history on Medium.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_037",
+    "threadId": "thread_037",
+    "sender": "alerts@glassdoor.com",
+    "subject": "12 new software intern positions matching your criteria",
+    "date": "2026-10-20 20:27:29",
+    "snippet": "Companies like Meta, Cisco, and Adobe just posted new vacancies.",
+    "body": "Companies like Meta, Cisco, and Adobe just posted new vacancies.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_038",
+    "threadId": "thread_038",
+    "sender": "digest@quora.com",
+    "subject": "Top Answer: What are the hardest questions asked in Google L4 interviews?",
+    "date": "2026-10-20 18:27:29",
+    "snippet": "Read popular developer answers and career advice from experienced engineers.",
+    "body": "Read popular developer answers and career advice from experienced engineers.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_039",
+    "threadId": "thread_039",
+    "sender": "team@grammarly.com",
+    "subject": "Weekly Writing Insights: You were more productive than 88% of users",
+    "date": "2026-10-20 16:27:29",
+    "snippet": "Review your weekly statistics, tone breakdown, and vocabulary achievements.",
+    "body": "Review your weekly statistics, tone breakdown, and vocabulary achievements.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_040",
+    "threadId": "thread_040",
+    "sender": "offers@bestbuy.com",
+    "subject": "Weekend Doorbuster Deals: Save up to  on M3 MacBooks",
+    "date": "2026-10-20 14:27:29",
+    "snippet": "Exclusive member pricing on laptops, audio, and gadgets while supplies last.",
+    "body": "Exclusive member pricing on laptops, audio, and gadgets while supplies last.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_041",
+    "threadId": "thread_041",
+    "sender": "newsletter@tldr.tech",
+    "subject": "TLDR Tech: The latest developments in AI and Big Tech",
+    "date": "2026-10-20 12:27:29",
+    "snippet": "Byte-sized news covering autonomous agents, LLM benchmarks, and venture rounds.",
+    "body": "Byte-sized news covering autonomous agents, LLM benchmarks, and venture rounds.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_042",
+    "threadId": "thread_042",
+    "sender": "updates@notion.so",
+    "subject": "What's new in Notion: Introducing AI Formats and Connected Databases",
+    "date": "2026-10-20 10:27:29",
+    "snippet": "Explore our newest release notes and template showcase.",
+    "body": "Explore our newest release notes and template showcase.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_043",
+    "threadId": "thread_043",
+    "sender": "store-news@steamgames.com",
+    "subject": "Weekend Publisher Sale: Huge discounts on indie titles",
+    "date": "2026-10-20 08:27:29",
+    "snippet": "Wishlisted games are now on sale. Check out your store deals.",
+    "body": "Wishlisted games are now on sale. Check out your store deals.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_044",
+    "threadId": "thread_044",
+    "sender": "news@producthunt.com",
+    "subject": "Today's Top 5 Products: Autonomous Agents, Dev Tools & AI UI",
+    "date": "2026-10-20 06:27:29",
+    "snippet": "Discover the best new products launched by the tech community today.",
+    "body": "Discover the best new products launched by the tech community today.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_045",
+    "threadId": "thread_045",
+    "sender": "rewards@starbucks.com",
+    "subject": "Double Star Day: Earn 2x Stars on any handcrafted drink",
+    "date": "2026-10-20 04:27:29",
+    "snippet": "Stop by your nearest store and scan your barcode to redeem extra stars.",
+    "body": "Stop by your nearest store and scan your barcode to redeem extra stars.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_046",
+    "threadId": "thread_046",
+    "sender": "noreply@redditmail.com",
+    "subject": "Trending on r/cscareerquestions: Should I do a take-home assessment?",
+    "date": "2026-10-20 02:27:29",
+    "snippet": "Explore discussions with over 350 comments from fellow candidates.",
+    "body": "Explore discussions with over 350 comments from fellow candidates.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_047",
+    "threadId": "thread_047",
+    "sender": "notifications@threads.net",
+    "subject": "Tech leaders are discussing the future of AI coding assistants",
+    "date": "2026-10-20 00:27:29",
+    "snippet": "See the latest posts and reply directly from your mobile app.",
+    "body": "See the latest posts and reply directly from your mobile app.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_048",
+    "threadId": "thread_048",
+    "sender": "news@frontendmentor.io",
+    "subject": "New Challenge Released: Build an Interactive Kanban Dashboard",
+    "date": "2026-10-19 22:27:29",
+    "snippet": "Improve your React and TypeScript skills with real-world design files.",
+    "body": "Improve your React and TypeScript skills with real-world design files.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_049",
+    "threadId": "thread_049",
+    "sender": "marketing@grammarly.com",
+    "subject": "Upgrade to Grammarly Premium: 50% Off Student Special",
+    "date": "2026-10-19 20:27:29",
+    "snippet": "Unlock advanced tone adjustments and plagiarism checking with our student tier.",
+    "body": "Unlock advanced tone adjustments and plagiarism checking with our student tier.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  },
+  {
+    "id": "msg_050",
+    "threadId": "thread_050",
+    "sender": "info@duolingo.com",
+    "subject": "Don't lose your 45-day streak! Keep your language progress alive",
+    "date": "2026-10-19 18:27:29",
+    "snippet": "Take 3 minutes today to finish your daily Spanish lesson.",
+    "body": "Take 3 minutes today to finish your daily Spanish lesson.\n\nUnsubscribe from these emails by clicking here: https://unsubscribe.example.com",
+    "labels": [
+      "INBOX"
+    ]
+  }
+]
