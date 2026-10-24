@@ -82,6 +82,67 @@ def build_audit_success_markdown(result: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def build_profile_card_markdown(profile: Dict[str, Any]) -> str:
+    """Renders an interactive account profile and status overview card."""
+    lines = []
+    lines.append("### 📇 Mailgent Live Connection Status")
+    lines.append(f"* **Connected Account:** `{profile.get('email')}`")
+    lines.append(f"* **Integration Mode:** **{profile.get('mode', 'live').upper()}**")
+    lines.append(f"* **Total Inbox Messages:** `{profile.get('total_messages', 'N/A')}`")
+    if "threads_total" in profile:
+        lines.append(f"* **Total Email Threads:** `{profile.get('threads_total')}`")
+    lines.append("\n**Active Agent Protection:** 🛡️ Operational")
+    lines.append("Type **`Audit`** to scan recent emails or **`Pipeline`** to view your job applications.")
+    return "\n".join(lines)
+
+
+def build_pipeline_markdown(analyzed_emails: List[Dict[str, Any]]) -> str:
+    """Renders an interactive student career radar and application tracker."""
+    job_emails = [e for e in analyzed_emails if e.get("analysis", {}).get("category") == "Job/Internship"]
+    
+    lines = []
+    lines.append("### 💼 Student Career Radar & Job Pipeline")
+    lines.append(f"Tracking **{len(job_emails)} active recruitment communications**:\n")
+
+    interviews = []
+    assessments = []
+    updates = []
+
+    for item in job_emails:
+        analysis = item.get("analysis", {})
+        subj = item.get("subject", "")
+        sender = item.get("sender", "")
+        deadline = analysis.get("deadline")
+
+        if "interview" in subj.lower() or "screen" in subj.lower():
+            dl_str = f" ⏰ *[Due: {deadline}]*" if deadline else ""
+            interviews.append(f"* 🟢 **{subj[:50]}** ({sender}){dl_str}")
+        elif "assessment" in subj.lower() or "challenge" in subj.lower() or "test" in subj.lower():
+            dl_str = f" ⏰ *[Due: {deadline}]*" if deadline else ""
+            assessments.append(f"* 🟡 **{subj[:50]}** ({sender}){dl_str}")
+        else:
+            updates.append(f"* ⚪ **{subj[:50]}** ({sender})")
+
+    if interviews:
+        lines.append("#### 🎯 Active Interview Loops")
+        lines.extend(interviews)
+        lines.append("")
+
+    if assessments:
+        lines.append("#### ⏳ Coding Challenges & Deadlines (< 48h)")
+        lines.extend(assessments)
+        lines.append("")
+
+    if updates:
+        lines.append("#### 📬 Application Updates & Reviews")
+        lines.extend(updates)
+        lines.append("")
+
+    lines.append("---")
+    lines.append("💡 *Tip: Reply **`Audit`** to organize your Gmail labels and prepare follow-up drafts!*")
+    return "\n".join(lines)
+
+
 def build_asi1_card_payload(analyzed_emails: List[Dict[str, Any]], pending_plan: Dict[str, Any]) -> Dict[str, Any]:
     """
     Constructs a structured JSON payload for ASI:One interactive card components.

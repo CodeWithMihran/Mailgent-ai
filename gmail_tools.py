@@ -284,6 +284,36 @@ class GmailClient:
         return self.apply_labels(message_ids=message_ids, remove_label_names=["INBOX"])
 
     # -------------------------------------------------------------------------
+    # Account Profile & Status Metrics
+    # -------------------------------------------------------------------------
+    def get_account_profile(self) -> Dict[str, Any]:
+        """Fetches live account statistics and label counts."""
+        if self.is_offline:
+            return {
+                "email": "student.demo@university.edu (Offline Mock Mode)",
+                "total_messages": len(_mock_inbox_state or []),
+                "unread_messages": sum(1 for m in (_mock_inbox_state or []) if "UNREAD" in m.get("labels", [])),
+                "mode": "offline"
+            }
+
+        try:
+            profile = self.service.users().getProfile(userId="me").execute()
+            return {
+                "email": profile.get("emailAddress", "me"),
+                "total_messages": profile.get("messagesTotal", 0),
+                "threads_total": profile.get("threadsTotal", 0),
+                "history_id": profile.get("historyId", "N/A"),
+                "mode": "live"
+            }
+        except Exception as e:
+            print(f"[!] Failed to get profile: {e}")
+            return {
+                "email": self.email_address,
+                "error": str(e),
+                "mode": "live"
+            }
+
+    # -------------------------------------------------------------------------
     # Creative Innovation: Ghosting Radar & Smart Follow-Up Drafter
     # -------------------------------------------------------------------------
     def create_followup_draft(self, to_email: str, subject: str, body: str, thread_id: Optional[str] = None) -> Dict[str, Any]:

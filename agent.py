@@ -52,6 +52,8 @@ from llm import EmailClassifier
 from cards import (
     build_audit_summary_markdown,
     build_audit_success_markdown,
+    build_profile_card_markdown,
+    build_pipeline_markdown,
     extract_pending_plan
 )
 
@@ -145,15 +147,30 @@ def process_user_intent(sender: str, text: str) -> str:
             return "🛑 **Action proposal cancelled.** No changes were made to your Gmail inbox."
         return "ℹ️ There are no active action proposals to cancel."
 
-    # 4. Help / Welcome / Unrecognized
+    # 4. Profile / Status Intent
+    elif any(k in cmd for k in ["profile", "status", "account", "info", "whoami"]):
+        print(f"[*] Mailgent: Processing PROFILE request from {sender}...")
+        profile_data = gmail_client.get_account_profile()
+        return build_profile_card_markdown(profile_data)
+
+    # 5. Career Pipeline / Jobs Radar Intent
+    elif any(k in cmd for k in ["pipeline", "jobs", "tracker", "interviews", "opportunities"]):
+        print(f"[*] Mailgent: Processing PIPELINE request from {sender}...")
+        emails = gmail_client.fetch_recent_emails(max_results=50)
+        analyzed_emails = classifier.classify_batch(emails)
+        return build_pipeline_markdown(analyzed_emails)
+
+    # 6. Help / Welcome / Unrecognized
     else:
         return (
             "👋 **Hi! I am Mailgent, your Autonomous Inbox Assistant.**\n\n"
             "Here is how I can help you stay on top of job applications and deadlines:\n\n"
             "* 🔍 **`Audit my emails`** — Scans recent emails, categorizes them, flags upcoming deadlines (< 48h), and prepares an action plan.\n"
+            "* 💼 **`Pipeline`** — Displays your active interview loops, coding assessments, and application updates.\n"
+            "* 📇 **`Profile`** — Shows live Gmail connection status and inbox counts.\n"
             "* ✅ **`Approve`** — Labels job emails (`[Agent] Job`), highlights urgent items (`[Agent] Urgent`), and archives promotional clutter.\n"
             "* 🛑 **`Cancel`** — Discards pending proposals.\n\n"
-            "*Type **`Audit`** to begin!*"
+            "*Type **`Audit`** or **`Pipeline`** to begin!*"
         )
 
 
