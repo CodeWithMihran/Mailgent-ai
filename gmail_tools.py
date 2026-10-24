@@ -91,17 +91,25 @@ class GmailClient:
     # -------------------------------------------------------------------------
     def fetch_recent_emails(self, max_results: int = 50, query: str = "in:inbox") -> List[Dict[str, Any]]:
         """
-        Fetches recent emails from INBOX with normalized metadata.
+        Fetches recent emails from INBOX or matching a search query with normalized metadata.
         Returns a list of dictionaries with keys:
           id, threadId, sender, subject, date, snippet, body, labels
         """
         if self.is_offline:
             mock_data = self._load_mock_data()
-            # Filter messages that currently have 'INBOX' label
-            results = [
-                msg for msg in mock_data 
-                if "INBOX" in msg.get("labels", [])
-            ][:max_results]
+            if query and query != "in:inbox":
+                q = query.lower().replace("in:inbox", "").strip()
+                results = [
+                    msg for msg in mock_data
+                    if q in msg.get("subject", "").lower() 
+                    or q in msg.get("sender", "").lower() 
+                    or q in msg.get("snippet", "").lower()
+                ][:max_results]
+            else:
+                results = [
+                    msg for msg in mock_data 
+                    if "INBOX" in msg.get("labels", [])
+                ][:max_results]
             print(f"[+] GmailClient: Fetched {len(results)} emails from offline mock store.")
             return results
 

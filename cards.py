@@ -143,6 +143,34 @@ def build_pipeline_markdown(analyzed_emails: List[Dict[str, Any]]) -> str:
     return "\n".join(lines)
 
 
+def build_search_results_markdown(query: str, emails: List[Dict[str, Any]]) -> str:
+    """Renders formatted search results from the user's inbox."""
+    lines = []
+    lines.append(f"### 🔎 Search Results for `{query}`")
+    if not emails:
+        lines.append(f"No emails found matching `{query}`.")
+        return "\n".join(lines)
+
+    lines.append(f"Found **{len(emails)} matching message(s)**:\n")
+    for idx, e in enumerate(emails, 1):
+        lines.append(f"**{idx}. [{e.get('sender', 'Unknown')}]** — *{e.get('subject', '(No Subject)')}*")
+        lines.append(f"   > {e.get('snippet', '')[:120]}...")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def build_custom_draft_markdown(draft: Dict[str, Any]) -> str:
+    """Renders a confirmation card for a custom draft created in Gmail."""
+    lines = []
+    lines.append("### 📝 Follow-Up Draft Created!")
+    lines.append(f"* **To:** `{draft.get('to')}`")
+    lines.append(f"* **Subject:** *{draft.get('subject')}*")
+    lines.append(f"* **Draft ID:** `{draft.get('id')}`")
+    lines.append(f"* **Status:** Ready in your **Gmail Drafts folder**.")
+    lines.append("\n👉 *Open Gmail, review your draft, and click Send whenever you're ready!*")
+    return "\n".join(lines)
+
+
 def build_asi1_card_payload(analyzed_emails: List[Dict[str, Any]], pending_plan: Dict[str, Any]) -> Dict[str, Any]:
     """
     Constructs a structured JSON payload for ASI:One interactive card components.

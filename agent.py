@@ -54,6 +54,8 @@ from cards import (
     build_audit_success_markdown,
     build_profile_card_markdown,
     build_pipeline_markdown,
+    build_search_results_markdown,
+    build_custom_draft_markdown,
     extract_pending_plan
 )
 
@@ -160,17 +162,45 @@ def process_user_intent(sender: str, text: str) -> str:
         analyzed_emails = classifier.classify_batch(emails)
         return build_pipeline_markdown(analyzed_emails)
 
-    # 6. Help / Welcome / Unrecognized
+    # 6. Search Inbox Intent
+    elif cmd.startswith("search ") or cmd.startswith("find "):
+        query_term = text.split(" ", 1)[1].strip()
+        print(f"[*] Mailgent: Processing SEARCH for '{query_term}' from {sender}...")
+        results = gmail_client.fetch_recent_emails(max_results=10, query=query_term)
+        return build_search_results_markdown(query_term, results)
+
+    # 7. Manual Draft Intent (e.g. "Draft to: recruiter@company.com, Subject: ..., Body: ...")
+    elif cmd.startswith("draft") or "create draft" in cmd:
+        to_email = "recruiter@example.com"
+        subject = "Software Engineer Application Follow-Up"
+        body = "Hello,\n\nI am writing to check in regarding my recent application. Thank you for your time!\n\nBest regards,\nCandidate"
+        
+        parts = text.split(",")
+        for p in parts:
+            if "to:" in p.lower():
+                to_email = p.split(":", 1)[1].strip()
+            elif "subject:" in p.lower():
+                subject = p.split(":", 1)[1].strip()
+            elif "body:" in p.lower():
+                body = p.split(":", 1)[1].strip()
+
+        print(f"[*] Mailgent: Creating custom draft to {to_email}...")
+        draft_res = gmail_client.create_followup_draft(to_email=to_email, subject=subject, body=body)
+        return build_custom_draft_markdown(draft_res)
+
+    # 8. Help / Welcome / Unrecognized
     else:
         return (
             "👋 **Hi! I am Mailgent, your Autonomous Inbox Assistant.**\n\n"
             "Here is how I can help you stay on top of job applications and deadlines:\n\n"
-            "* 🔍 **`Audit my emails`** — Scans recent emails, categorizes them, flags upcoming deadlines (< 48h), and prepares an action plan.\n"
+            "* 🔍 **`Audit my emails`** — Scans recent emails, categorizes them, flags deadlines (< 48h), and prepares an action plan.\n"
             "* 💼 **`Pipeline`** — Displays your active interview loops, coding assessments, and application updates.\n"
+            "* 🔎 **`Search <term>`** — Searches your inbox for specific keywords (e.g. `Search interview`, `Search stipend`).\n"
+            "* 📝 **`Draft to: <email>, Subject: <title>, Body: <msg>`** — Composes a custom follow-up draft in Gmail.\n"
             "* 📇 **`Profile`** — Shows live Gmail connection status and inbox counts.\n"
             "* ✅ **`Approve`** — Labels job emails (`[Agent] Job`), highlights urgent items (`[Agent] Urgent`), and archives promotional clutter.\n"
             "* 🛑 **`Cancel`** — Discards pending proposals.\n\n"
-            "*Type **`Audit`** or **`Pipeline`** to begin!*"
+            "*Type **`Audit`**, **`Pipeline`**, or **`Search`** to begin!*"
         )
 
 
