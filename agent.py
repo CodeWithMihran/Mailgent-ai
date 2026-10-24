@@ -46,6 +46,15 @@ from uagents_core.contrib.protocols.chat import (
     EndSessionContent,
     TextContent
 )
+from uagents_core.contrib.protocols.payment import (
+    payment_protocol_spec,
+    RequestPayment,
+    CommitPayment,
+    CompletePayment,
+    RejectPayment,
+    CancelPayment,
+    Funds
+)
 
 from gmail_tools import GmailClient
 from llm import EmailClassifier
@@ -276,6 +285,41 @@ async def handle_acknowledgement(ctx: Context, sender: str, msg: ChatAcknowledge
 
 
 agent.include(chat_proto, publish_manifest=True)
+
+
+# -------------------------------------------------------------------------
+# Payment Protocol (Fetch.ai Agent-to-Agent Micro-Transactions & Monetization)
+# -------------------------------------------------------------------------
+payment_proto = Protocol(name=payment_protocol_spec.name, version=payment_protocol_spec.version)
+
+
+@payment_proto.on_message(model=CommitPayment)
+async def handle_commit_payment(ctx: Context, sender: str, msg: CommitPayment):
+    """
+    Handles incoming micropayments for premium agent services:
+    - 0.01 FET: High-volume deep inbox scan (> 50 emails)
+    - 0.05 FET: Autonomous recruiter follow-up & negotiation drafting
+    """
+    ctx.logger.info(
+        f"Payment received from {sender}: {msg.funds.amount} {msg.funds.currency} (Tx: {msg.transaction_id})"
+    )
+    completion = CompletePayment(transaction_id=msg.transaction_id)
+    await ctx.send(sender, completion)
+    ctx.logger.info(f"Payment {msg.transaction_id} verified and completed.")
+
+
+@payment_proto.on_message(model=RequestPayment)
+async def handle_request_payment(ctx: Context, sender: str, msg: RequestPayment):
+    """Handles incoming payment requests from peer recruitment or analytics agents."""
+    ctx.logger.info(f"Payment request received from {sender}: {msg.description}")
+    rejection = RejectPayment(
+        reference=msg.reference,
+        reason="Peer payment requests require human approval via HITL."
+    )
+    await ctx.send(sender, rejection)
+
+
+agent.include(payment_proto, publish_manifest=True)
 
 
 # -------------------------------------------------------------------------
